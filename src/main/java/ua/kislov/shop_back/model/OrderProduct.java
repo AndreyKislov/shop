@@ -1,5 +1,6 @@
 package ua.kislov.shop_back.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,5 +28,6 @@ public class OrderProduct {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shop_order_id")
+    @JsonIgnore
     private ShopOrder shopOrder;
 }

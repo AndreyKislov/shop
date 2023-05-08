@@ -20,10 +20,14 @@ public class ShopOrder {
     @Column(name = "order_id")
     private long orderId;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private OrderStatus orderStatus;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private ShopClient shopClient;
 
-    @OneToMany(mappedBy = "shopOrder", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "shopOrder", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<OrderProduct> orderProductsList;
 }

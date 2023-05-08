@@ -11,28 +11,25 @@ import ua.kislov.shop_back.dto.ProductDTO;
 import ua.kislov.shop_back.dto.ProductListDTO;
 import ua.kislov.shop_back.dto.UpdateQuantityDTO;
 import ua.kislov.shop_back.model.Product;
-import ua.kislov.shop_back.model.ShoppingCartItem;
 import ua.kislov.shop_back.services.CartService;
-import ua.kislov.shop_back.services.ClientServices;
+import ua.kislov.shop_back.services.ClientService;
 import ua.kislov.shop_back.services.ProductService;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/shop")
 public class ProductController {
     private final ProductService productService;
-    private final ClientServices clientServices;
+    private final ClientService clientService;
     private final CartService cartService;
 
     @Autowired
     public ProductController(ProductService productService,
-                             ClientServices clientServices,
+                             ClientService clientService,
                              CartService cartService) {
         this.productService = productService;
-        this.clientServices = clientServices;
+        this.clientService = clientService;
         this.cartService = cartService;
     }
 

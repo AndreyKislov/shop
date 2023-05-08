@@ -19,13 +19,13 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class CartService {
     private final ShoppingCartItemRepository shoppingCartItemRepository;
-    private final ClientServices clientServices;
+    private final ClientService clientService;
     private final ProductService productService;
 
     @Autowired
-    public CartService(ShoppingCartItemRepository shoppingCartItemRepository, ClientServices clientServices, ProductService productService) {
+    public CartService(ShoppingCartItemRepository shoppingCartItemRepository, ClientService clientService, ProductService productService) {
         this.shoppingCartItemRepository = shoppingCartItemRepository;
-        this.clientServices = clientServices;
+        this.clientService = clientService;
         this.productService = productService;
     }
 
@@ -42,7 +42,7 @@ public class CartService {
 
     @Transactional
     public void addToCart(CartItemsDTO dto) {
-        ShopClient shopClient = clientServices.getProxy(dto.getClientId());
+        ShopClient shopClient = clientService.getProxy(dto.getClientId());
         Product product = productService.getProxy(dto.getProductId());
         long productId = dto.getProductId();
         long clientId = dto.getClientId();

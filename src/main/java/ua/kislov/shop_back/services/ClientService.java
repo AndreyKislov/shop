@@ -10,12 +10,12 @@ import ua.kislov.shop_back.repositories.ClientRepository;
 
 @Service
 @Transactional(readOnly = true)
-public class ClientServices {
+public class ClientService {
 
     private final ClientRepository clientRepository;
 
     @Autowired
-    public ClientServices(ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 

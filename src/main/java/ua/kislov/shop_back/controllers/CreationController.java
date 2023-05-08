@@ -2,24 +2,23 @@ package ua.kislov.shop_back.controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.kislov.shop_back.dto.ShopClientDTO;
 import ua.kislov.shop_back.model.ShopClient;
-import ua.kislov.shop_back.services.ClientServices;
+import ua.kislov.shop_back.services.ClientService;
 
 
 @RestController
 @RequestMapping("client")
 public class CreationController {
 
-    private final ClientServices services;
+    private final ClientService services;
     private final ModelMapper mapper;
 
     @Autowired
-    public CreationController(ClientServices services, ModelMapper mapper) {
+    public CreationController(ClientService services, ModelMapper mapper) {
         this.services = services;
         this.mapper = mapper;
     }
