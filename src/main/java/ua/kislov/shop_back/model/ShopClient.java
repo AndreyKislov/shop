@@ -1,10 +1,7 @@
 package ua.kislov.shop_back.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -15,21 +12,17 @@ import java.util.List;
 @Entity
 @Table(name = "client")
 public class ShopClient {
-
     @Id
-    @Column(name = "id")
+    @Column(name = "client_id")
     private long id;
-    @Column(name = "name")
+    @Column(name = "client_name")
     private String clientName;
-    @Column(name = "surname")
+    @Column(name = "client_surname")
     private String surname;
-    @Column(name = "email")
+    @Column(name = "client_email")
     private String email;
-    @Column(name = "number")
+    @Column(name = "client_number")
     private String number;
-    @ManyToMany
-    @JoinTable(name = "client_product",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private List<Product> shoppingCart;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "shopClient")
+    private List<ShoppingCartItem> shoppingCart;
 }

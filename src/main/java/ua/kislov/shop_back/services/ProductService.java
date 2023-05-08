@@ -10,26 +10,27 @@ import ua.kislov.shop_back.exceptions.ProductNotFoundException;
 import ua.kislov.shop_back.model.Product;
 import ua.kislov.shop_back.repositories.ProductRepository;
 
-import java.util.List;
-
 @Service
 @Transactional(readOnly = true)
 public class ProductService {
 
-    private final ProductRepository repository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(ProductRepository repository) {
-        this.repository = repository;
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    public List<Product> catalog(int page, int size, String sort){
+    public Page<Product> catalog(int page, int size, String sort){
         PageRequest pageable =  PageRequest.of(page, size, Sort.by(sort));
-        Page<Product> products = repository.findAll(pageable);
-        return products.getContent();
+        return productRepository.findAll(pageable);
     }
 
-    public Product product(long id) throws ProductNotFoundException{
-        return repository.findById(id).orElseThrow(ProductNotFoundException::new);
+    public Product getProduct(long id) throws ProductNotFoundException{
+        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException("Product is not found"));
+    }
+
+    public Product getProxy(long id){
+        return productRepository.getReferenceById(id);
     }
 }

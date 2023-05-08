@@ -28,8 +28,9 @@ public class SecurityConfig {
       return httpSecurity
                .csrf(AbstractHttpConfigurer::disable)
                .authorizeHttpRequests(auth -> auth
-                       .anyRequest()
-                       .permitAll())
+                       .requestMatchers("/admin/**")
+                       .hasRole("ADMIN")
+                       .anyRequest().authenticated())
               .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
               .sessionManagement(httpSecuritySessionManagementConfigurer ->
                       httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
